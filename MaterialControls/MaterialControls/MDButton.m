@@ -212,14 +212,14 @@
             self.btImage.transform = CGAffineTransformMakeRotation(M_PI / 4);
           }
           completion:^(BOOL finished) {
-            _rotated = true;
-            if ([_mdButtonDelegate
+            self->_rotated = true;
+            if ([self->_mdButtonDelegate
                     respondsToSelector:@selector(rotationCompleted:)]) {
-              [_mdButtonDelegate rotationCompleted:self];
+              [self->_mdButtonDelegate rotationCompleted:self];
             }
           }];
-      if ([_mdButtonDelegate respondsToSelector:@selector(rotationStarted:)]) {
-        [_mdButtonDelegate rotationStarted:self];
+      if ([self->_mdButtonDelegate respondsToSelector:@selector(rotationStarted:)]) {
+        [self->_mdButtonDelegate rotationStarted:self];
       }
     } else {
       [UIView animateWithDuration:duration
@@ -229,10 +229,10 @@
             self.btImage.transform = CGAffineTransformMakeRotation(0);
           }
           completion:^(BOOL finished) {
-            _rotated = false;
-            if ([_mdButtonDelegate
+            self->_rotated = false;
+            if ([self->_mdButtonDelegate
                     respondsToSelector:@selector(rotationCompleted:)]) {
-              [_mdButtonDelegate rotationCompleted:self];
+              [self->_mdButtonDelegate rotationCompleted:self];
             }
           }];
       if ([_mdButtonDelegate respondsToSelector:@selector(rotationStarted:)]) {
@@ -264,17 +264,17 @@
           }
           completion:^(BOOL finished) {
             //[self setImage:_imageRotated forState:UIControlStateNormal];
-            [self.btImage setImage:_imageRotated];
+            [self.btImage setImage:self->_imageRotated];
             self.btImage.transform = CGAffineTransformMakeRotation(-M_PI / 2);
             [UIView animateWithDuration:duration / 2
                 animations:^{
                   self.btImage.transform = CGAffineTransformMakeRotation(0);
                 }
                 completion:^(BOOL finished) {
-                  _rotated = true;
-                  if ([_mdButtonDelegate
+                  self->_rotated = true;
+                  if ([self->_mdButtonDelegate
                           respondsToSelector:@selector(rotationCompleted:)]) {
-                    [_mdButtonDelegate rotationCompleted:self];
+                    [self->_mdButtonDelegate rotationCompleted:self];
                   }
                 }];
           }];
@@ -306,17 +306,17 @@
           }
           completion:^(BOOL finished) {
             //[self setImage:_imageNormal forState:UIControlStateNormal];
-            [self.btImage setImage:_imageNormal];
+            [self.btImage setImage:self->_imageNormal];
             self.btImage.transform = CGAffineTransformMakeRotation(M_PI / 2);
             [UIView animateWithDuration:duration / 2
                 animations:^{
                   self.btImage.transform = CGAffineTransformMakeRotation(0);
                 }
                 completion:^(BOOL finished) {
-                  _rotated = false;
-                  if ([_mdButtonDelegate
+                  self->_rotated = false;
+                  if ([self->_mdButtonDelegate
                           respondsToSelector:@selector(rotationCompleted:)]) {
-                    [_mdButtonDelegate rotationCompleted:self];
+                    [self->_mdButtonDelegate rotationCompleted:self];
                   }
                 }];
           }];

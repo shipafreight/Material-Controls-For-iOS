@@ -35,8 +35,7 @@
 
 @property (nullable, strong, nonatomic) NSDate *selectedDate;
 @property (nonnull, strong, nonatomic) NSDate *minimumDate;
-@property (nullable, strong, nonatomic) NSDate *maximumDate;
-@property(weak, nonatomic) id<MDDatePickerDialogDelegate> delegate;
+@property(weak, nonatomic, nullable) id<MDDatePickerDialogDelegate> delegate;
 
 - (void)show;
 - (void)setTitleOk: (nonnull NSString *) okTitle andTitleCancel: (nonnull NSString *) cancelTitle;

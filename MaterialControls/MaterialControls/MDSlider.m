@@ -523,14 +523,14 @@
       }];
       [UIView animateWithDuration:kMDAnimationDuration
                        animations:^{
-                         intensityView.alpha = 1;
-                         tickMarksView.alpha = 1;
+                         self->intensityView.alpha = 1;
+                         self->tickMarksView.alpha = 1;
                        }];
     } else {
       [UIView animateWithDuration:kMDAnimationDuration
                        animations:^{
-                         intensityView.alpha = 0;
-                         tickMarksView.alpha = 0;
+                         self->intensityView.alpha = 0;
+                         self->tickMarksView.alpha = 0;
                        }];
       trackView.backgroundColor = _disabledColor;
       [thumbView disabled:nil];

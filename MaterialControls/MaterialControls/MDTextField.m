@@ -166,7 +166,7 @@
   if (![_errorColor isEqual:errorColor]) {
     _errorColor = errorColor;
     if (_state == MDTextFieldViewStateError)
-      highlightLayer.strokeColor = _errorColor.CGColor;
+      highlightLayer.strokeColor = _highlightColor.CGColor;
   }
 }
 
@@ -211,7 +211,7 @@
           hlAnimation.fillMode = kCAFillModeForwards;
 
           [CATransaction setCompletionBlock:^{
-            [highlightLayer removeFromSuperlayer];
+            [self->highlightLayer removeFromSuperlayer];
           }];
 
           [highlightLayer addAnimation:hlAnimation forKey:@"strokeEnd"];
@@ -298,12 +298,7 @@
   [highlightLayer setPath:linePath.CGPath];
   [highlightLayer setLineWidth:_highlightHeight];
   [highlightLayer setFillColor:[[UIColor clearColor] CGColor]];
-  // use stroke color depending on current state
-    if (_state == MDTextFieldViewStateError) {
-        [highlightLayer setStrokeColor:[_errorColor CGColor]];
-    } else {
-        [highlightLayer setStrokeColor:[_highlightColor CGColor]];
-    }
+  [highlightLayer setStrokeColor:[_highlightColor CGColor]];
 }
 
 - (void)drawDashedLineDivider {
@@ -777,24 +772,6 @@
   _textView.keyboardType = keyboardType;
 }
 
-- (void)setAutocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType {
-  _autocapitalizationType = autocapitalizationType;
-  _textField.autocapitalizationType = autocapitalizationType;
-  _textView.autocapitalizationType = autocapitalizationType;
-}
-
-- (void)setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType {
-  _autocorrectionType = autocorrectionType;
-  _textField.autocorrectionType = autocorrectionType;
-  _textView.autocorrectionType = autocorrectionType;
-}
-
-- (void)setSpellCheckingType:(UITextSpellCheckingType)spellCheckingType {
-  _spellCheckingType = spellCheckingType;
-  _textField.spellCheckingType = spellCheckingType;
-  _textView.spellCheckingType = spellCheckingType;
-}
-
 - (void)setDividerAnimation:(BOOL)dividerAnimation {
   _dividerAnimation = dividerAnimation;
   [_dividerHolder setUseAnimation:_dividerAnimation];
@@ -1077,9 +1054,10 @@
 }
 
 - (void)setViewState:(MDTextFieldViewState)state {
-  _viewState = state;
+  if (_viewState != state) {
+    _viewState = state;
 
-  switch (state) {
+    switch (state) {
     case MDTextFieldViewStateNormal:
       if (!_fullWidth) {
         [_dividerHolder setState:MDTextFieldViewStateNormal];
@@ -1112,6 +1090,7 @@
 
     default:
       break;
+    }
   }
 }
 
@@ -1348,13 +1327,6 @@
     return _textField.text.length;
   else
     return _textView.text.length;
-}
-
-#pragma mark Cleanup
-
-- (void)dealloc {
-    [suggestView removeFromSuperview];
-    suggestView = nil;
 }
 
 @end

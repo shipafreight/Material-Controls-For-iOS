@@ -211,7 +211,7 @@
   if (animated) {
     [UIView animateWithDuration:.2f
                      animations:^{
-                       indicatorView.frame =
+                       self->indicatorView.frame =
                            CGRectMake(frame.origin.x, self.bounds.size.height -
                                                           kMDIndicatorHeight,
                                       frame.size.width, kMDIndicatorHeight);

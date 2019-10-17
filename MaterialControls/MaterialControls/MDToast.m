@@ -267,11 +267,11 @@ MDToastManager *managerInstance;
       }
       completion:^(BOOL finished) {
         if (finished) {
-          isAnimating = false;
+          self->isAnimating = false;
           [self performDelegateAction:@selector(toastDidAppear:)];
           [self performSelector:@selector(dismiss)
                      withObject:nil
-                     afterDelay:_duration];
+                     afterDelay:self->_duration];
         }
       }];
 }
@@ -320,10 +320,10 @@ MDToastManager *managerInstance;
       }
       completion:^(BOOL finished) {
         if (finished) {
-          isAnimating = false;
+          self->isAnimating = false;
           [self removeFromSuperview];
-          [textLabel removeFromSuperview];
-          _isShowing = false;
+          [self->textLabel removeFromSuperview];
+          self->_isShowing = false;
           [self performDelegateAction:@selector(toastDidDisappear:)];
         }
       }];

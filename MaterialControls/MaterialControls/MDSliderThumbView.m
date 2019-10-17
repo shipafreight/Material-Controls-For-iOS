@@ -112,7 +112,7 @@
   _state = MDSliderThumbStateFocused;
   [UIView animateWithDuration:kMDAnimationDuration
                    animations:^{
-                     nodeWidthConstraint.constant = kMDThumbForcusedRadius * 2;
+                     self->nodeWidthConstraint.constant = kMDThumbForcusedRadius * 2;
                      [self layoutIfNeeded];
                    }
                    completion:completion];
@@ -137,7 +137,7 @@
   _state = MDSliderThumbStateNormal;
   [UIView animateWithDuration:kMDAnimationDuration
                    animations:^{
-                     nodeWidthConstraint.constant = kMDThumbRadius * 2;
+                     self->nodeWidthConstraint.constant = kMDThumbRadius * 2;
                      [self layoutIfNeeded];
                    }
                    completion:completion];
@@ -162,7 +162,7 @@
   _state = MDSliderThumbStateNormal;
   [UIView animateWithDuration:kMDAnimationDuration
                    animations:^{
-                     nodeWidthConstraint.constant = kMDThumbRadius * 2;
+                     self->nodeWidthConstraint.constant = kMDThumbRadius * 2;
                      [self layoutIfNeeded];
                    }
                    completion:completion];
@@ -182,7 +182,7 @@
   _state = MDSliderThumbStateDisabled;
   [UIView animateWithDuration:kMDAnimationDuration
                    animations:^{
-                     nodeWidthConstraint.constant = kMDThumbDisabledRadius * 2;
+                     self->nodeWidthConstraint.constant = kMDThumbDisabledRadius * 2;
                      [self layoutIfNeeded];
                    }
                    completion:completion];
@@ -268,7 +268,7 @@
   if (animated) {
     [UIView animateWithDuration:kMDAnimationDuration
                      animations:^{
-                       _bubble.backgroundColor = color;
+                       self->_bubble.backgroundColor = color;
                      }];
   } else {
     _bubble.backgroundColor = color;

@@ -156,7 +156,7 @@
           0, _scrollOffset * _collectionViewFlowLayout.itemSize.height);
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-      NSArray *cells = _collectionView.visibleCells;
+      NSArray *cells = self->_collectionView.visibleCells;
       [cells enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
       }];
     });

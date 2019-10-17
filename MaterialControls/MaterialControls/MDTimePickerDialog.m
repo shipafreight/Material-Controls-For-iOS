@@ -999,7 +999,7 @@
         view.transform = CGAffineTransformMakeRotation((degree) * (M_PI / 180));
       }
       completion:^(BOOL finished) {
-        if (!_clockHour.hidden) {
+        if (!self->_clockHour.hidden) {
           [self showClockMinute];
         }
       }];
@@ -1085,15 +1085,7 @@
   int tag = (int)selectedButton.tag;
   CGFloat degreesToRotate;
   if (!_clockHour.hidden) {
-    if (_clockMode == MDClockMode12H) {
-      if (self.currentHour < 12) {
-        self.currentHour = (tag - 110) % 12;
-      } else {
-        self.currentHour = 12 + ((tag - 110) % 12);
-      }
-    } else {
-      self.currentHour = tag - 110;
-    }
+    self.currentHour = tag - 110;
     degreesToRotate = (_currentHour % 12) * 30;
     [self updateClockHand];
 
@@ -1105,7 +1097,7 @@
 
     preHourTag = tag;
   } else {
-    self.currentMinute = ((tag - 110 - 24) * 5) % 60;
+    self.currentMinute = (tag - 110 - 24) * 5;
     degreesToRotate = (_currentMinute / 5) * 30;
     if (preMinuteTag != -1) {
       [((UIButton *)[_clockMinute
@@ -1206,27 +1198,27 @@
         CGAffineTransformScale(CGAffineTransformIdentity, 1.2, 1.2);
     [UIView animateWithDuration:0.3 / 1.5
         animations:^{
-          _clockHour.alpha = 0.2;
-          _clockHour.transform =
+          self->_clockHour.alpha = 0.2;
+          self->_clockHour.transform =
               CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
           [self updateClockHand];
           [self updateHeaderView];
-          _clockHandView.transform = CGAffineTransformMakeRotation(
-              DEGREES_TO_RADIANS(_currentHour * 30));
+          self->_clockHandView.transform = CGAffineTransformMakeRotation(
+              DEGREES_TO_RADIANS(self->_currentHour * 30));
         }
         completion:^(BOOL finished) {
           [UIView animateWithDuration:0.3 / 2
               animations:^{
-                _clockHour.transform =
+                self->_clockHour.transform =
                     CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-                _clockHour.alpha = 1.0;
+                self->_clockHour.alpha = 1.0;
               }
               completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.6 / 2
                                  animations:^{
-                                   _clockHour.transform =
+                                   self->_clockHour.transform =
                                        CGAffineTransformIdentity;
-                                   animating = NO;
+                                   self->animating = NO;
                                  }
                                  completion:nil];
               }];
@@ -1236,15 +1228,15 @@
     _clockMinute.alpha = 0.2;
     [UIView animateWithDuration:0.3 / 2
         animations:^{
-          _clockMinute.transform =
+          self->_clockMinute.transform =
               CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
         }
         completion:^(BOOL finished) {
           [UIView animateWithDuration:0.3 / 2
                            animations:^{
-                             _clockMinute.alpha = 0.0;
-                             _clockMinute.transform = CGAffineTransformIdentity;
-                             _clockMinute.hidden = YES;
+                             self->_clockMinute.alpha = 0.0;
+                             self->_clockMinute.transform = CGAffineTransformIdentity;
+                             self->_clockMinute.hidden = YES;
                            }];
         }];
 
@@ -1265,27 +1257,27 @@
 
     [UIView animateWithDuration:0.3 / 1.5
         animations:^{
-          _clockMinute.alpha = 0.2;
-          _clockMinute.transform =
+          self->_clockMinute.alpha = 0.2;
+          self->_clockMinute.transform =
               CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
           [self updateClockHand];
           [self updateHeaderView];
-          _clockHandView.transform = CGAffineTransformMakeRotation(
-              DEGREES_TO_RADIANS(_currentMinute / 5 * 30));
+          self->_clockHandView.transform = CGAffineTransformMakeRotation(
+              DEGREES_TO_RADIANS(self->_currentMinute / 5 * 30));
         }
         completion:^(BOOL finished) {
           [UIView animateWithDuration:0.3 / 2
               animations:^{
-                _clockMinute.transform =
+                self->_clockMinute.transform =
                     CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-                _clockMinute.alpha = 1.0;
+                self->_clockMinute.alpha = 1.0;
               }
               completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.3 / 2
                                  animations:^{
-                                   _clockMinute.transform =
+                                   self->_clockMinute.transform =
                                        CGAffineTransformIdentity;
-                                   animating = NO;
+                                   self->animating = NO;
                                  }
                                  completion:nil];
               }];
@@ -1295,15 +1287,15 @@
     _clockHour.alpha = 0.2;
     [UIView animateWithDuration:0.3 / 2
         animations:^{
-          _clockHour.transform =
+          self->_clockHour.transform =
               CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
         }
         completion:^(BOOL finished) {
           [UIView animateWithDuration:0.3 / 2
                            animations:^{
-                             _clockHour.transform = CGAffineTransformIdentity;
-                             _clockHour.hidden = YES;
-                             _clockHour.alpha = 0.0;
+                             self->_clockHour.transform = CGAffineTransformIdentity;
+                             self->_clockHour.hidden = YES;
+                             self->_clockHour.alpha = 0.0;
                            }];
         }];
 

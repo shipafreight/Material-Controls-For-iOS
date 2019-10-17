@@ -27,7 +27,7 @@
 
 @implementation MDSuggestPopupView {
   MDSuggestTableView *tableView;
-  __weak MDTextField *mdTextField;
+  MDTextField *mdTextField;
   NSMutableArray *suggestionOptions;
   UIView *popupHolder;
   float keyboardHeight;
@@ -113,11 +113,6 @@ NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
 
 - (void)unregisterForKeyboardNotifications {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)dealloc
-{
-    [self unregisterForKeyboardNotifications];
 }
 
 - (void)textView:(MDTextField *)textField didChangeText:(NSString *)text {
